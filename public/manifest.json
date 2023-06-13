@@ -1,0 +1,58 @@
+{
+  "short_name": "MadTransit",
+  "name": "MadTransit",
+  "description": "A real-time bus finder app built by a commuter. For commuters. This lightweight app helps those that are riding from the same stops every day.",
+  "icons": [
+    {
+      "src": "favicon.ico",
+      "sizes": "48x48",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "img/android-chrome-192x192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "img/android-chrome-512x512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    },
+    {
+      "src": "img/512-maskable.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "maskable"
+    }
+  ],
+  "start_url": "/",
+  "display": "standalone",
+  "theme_color": "#ffffff",
+  "background_color": "#ffffff",
+
+  "screenshots": [
+    {
+      "src": "img/Screenshot-arrivals.jpg",
+      "type": "image/jpeg",
+      "sizes": "1080x1974",
+      "label": "Real-time bus arrival dashboard for a specific stop"
+    },
+    {
+      "src": "img/Screenshot-bookmarks.jpg",
+      "type": "image/jpeg",
+      "sizes": "1080x1970",
+      "label": "Customize your own bookmarks for the stops you are interested in"
+    },
+    {
+      "src": "img/Screenshot-map.jpg",
+      "type": "image/jpeg",
+      "sizes": "1080x1970",
+      "label": "Search and find the bus stops you want to bookmark using a Madison system map"
+    }
+  ],
+  "categories": [
+    "travel",
+    "transportation",
+    "navigation"
+  ]
+}

@@ -1,0 +1,13 @@
+body {
+  margin: 0;
+  font-family: "source-sans-pro","Source Sans Pro","Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+
+.map-container {
+  height: 93vh;
+  width: 100%
+}
+
+a {
+  color: #f0ebd8;
+}
