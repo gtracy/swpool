@@ -1,44 +1,24 @@
 import React from 'react';
+import dayjs from 'dayjs';
+
+import { useState } from 'react';
 
 import { AppBar, Box, Toolbar, Typography } from '@mui/material';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import InstallPWA from '../components/InstallPWA';
+import { MobileDatePicker } from '@mui/x-date-pickers';
 
+import Programming from '../components/Programming';
 
 const theme = createTheme({
-    palette: {
-      mode: 'light',
-      primary: {
-        main: '#1f355a',
-      },
-      secondary: {
-        main: '#BDF7C1',
-      },
-      background: {
-        default: '#1f355a',
-      },
-      error: {
-        main: '#c6d21a',
-      },
-      text: {
-        primary: '#f0ebd8',//#ffebee',
-        secondary: '#ffebee', //'#81f786',
-        disabled: 'rgba(241,166,166,0.38)',
-        hint: '#f7e22e',
-      },
-      },
-    typography: {
-      h1: {
-        fontSize: '8.2rem',
-        fontWeight: 700,
-        lineHeight: 0.75,
-        paddingTop: '16px'
-      },
-    },
+
 });
 
 export default function SWPool() {
+    const [activeDate, setActiveDate] = useState(new Date());
 
     return(
         <ThemeProvider theme={theme}>
@@ -50,11 +30,14 @@ export default function SWPool() {
                 elevation={0}
             >
                 <Toolbar sx={{ padding:0, margin:0,justifyContent: 'space-between' }}>
+                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                    <MobileDatePicker defaultValue={dayjs(activeDate)}/>
+                </LocalizationProvider>
                 </Toolbar>
             </AppBar>
 
             <Box sx={{ flexGrow: 1, maxHeight:'92vh',overflowY: 'auto', paddingTop: '70px' }}>
-              hi, greg
+                <Programming activeDate={activeDate} />
             </Box>
 
             <AppBar position="fixed" color="primary" sx={{ top: 'auto', bottom: 0 }}>
@@ -63,7 +46,7 @@ export default function SWPool() {
                     sx={{ padding:0, paddingLeft:1, margin:0,justifyContent: 'space-between' }}
                 >
                     <Typography variant="subtitle2">
-                     <a href="mailto:feedback+swpool@madisonbus.org?subject=MadTransit feedback">feedback</a> <span>&#x1F64F;</span>
+                     <a href="mailto:feedback@swpool.org?subject=MadTransit feedback">feedback</a> <span>&#x1F64F;</span>
                     </Typography>
 
                     <InstallPWA/>
