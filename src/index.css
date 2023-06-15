@@ -11,3 +11,9 @@ body {
 a {
   color: #f0ebd8;
 }
+
+.card {
+  max-width: 80%;
+  margin: auto;
+  margin-bottom: 12px;
+}

@@ -5,7 +5,7 @@ import { Card, CardContent, Typography } from '@mui/material';
 export default function Programming({activeDate}) {
 
     return(
-    <Card sx={{ maxWidth: '80vw', mx:'auto' }}>
+    <Card className="card">
       <CardContent>
         <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
           Word of the Day

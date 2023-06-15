@@ -12,6 +12,7 @@ import InstallPWA from '../components/InstallPWA';
 import { MobileDatePicker } from '@mui/x-date-pickers';
 
 import Programming from '../components/Programming';
+import Announcement from '../components/Announcement';
 
 const theme = createTheme({
 
@@ -37,6 +38,7 @@ export default function SWPool() {
             </AppBar>
 
             <Box sx={{ flexGrow: 1, maxHeight:'92vh',overflowY: 'auto', paddingTop: '70px' }}>
+                <Announcement/>
                 <Programming activeDate={activeDate} />
             </Box>
 
