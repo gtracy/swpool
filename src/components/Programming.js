@@ -1,28 +1,20 @@
-import React from 'react';
+import React, {useState,useEffect} from 'react';
 
-import { Card, CardContent, Typography } from '@mui/material';
+import Event from './Event';
 
-export default function Programming({activeDate}) {
 
-    return(
-    <Card className="card">
-      <CardContent>
-        <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-          Word of the Day
-        </Typography>
-        <Typography variant="h5" component="div">
-          hey, greg. first card!
-        </Typography>
-        <Typography sx={{ mb: 1.5 }} color="text.secondary">
-          active date here
-        </Typography>
-        <Typography variant="body2">
-          well meaning and kindly.
-          <br />
-          {'"a benevolent smile"'}
-        </Typography>
-      </CardContent>
-    </Card>
-    )
+const buildKey = (e) => {
+    return(e[2]+e[3]+e[4]);
+}
+
+export default function Programming({events}) {
+
+    console.log(events);
+
+    return(<div>
+        {events.map( (e) => (
+            <Event key={buildKey(e)} eventDetails={e} />
+        ))}
+    </div>)
 
 }
