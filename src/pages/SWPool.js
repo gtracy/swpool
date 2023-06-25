@@ -19,6 +19,7 @@ import Announcement from '../components/Announcement';
 
 import { gaEvents } from '../analytics';
 import { getSheetData } from '../google';
+import { schedule } from '../schedule';
 
 const theme = createTheme({
 
@@ -35,20 +36,22 @@ const useStyles = makeStyles({
 export default function SWPool() {
     const classes = useStyles();
 
-    const [activeDate, setActiveDate] = useState(new Date());
+    const [activeDate, setActiveDate] = useState('2023-06-25');
     const [events,setEvents] = useState([]);
     const [loading,setLoading] = useState(true);
 
     useEffect( () => {
         setLoading(true);
         gaEvents.eventOccurred('load sheet');
-        getSheetData()
+
+        schedule.loadSchedule()
           .then(result => {
             setEvents(result);
             console.log('Events loaded! ' + result.length);
           })
           .catch(error => {
             console.error("error loading arrival data");
+            console.dir(error);
             gaEvents.eventOccurred('sheet load failed');
           })
           .finally(() => {
@@ -77,8 +80,7 @@ export default function SWPool() {
             ) : (
                 <Box sx={{ flexGrow: 1, maxHeight:'92vh',overflowY: 'auto', paddingTop: '70px' }}>
                     <Announcement/>
-                    {console.log('pass down events, '+events.length)}
-                    <Programming events={events} />
+                    <Programming activeDate={activeDate} />
                 </Box>
             )}
 

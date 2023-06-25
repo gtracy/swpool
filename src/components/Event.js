@@ -8,16 +8,16 @@ export default function Event({eventDetails}) {
     <Card className="card">
       <CardContent>
         <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-          {eventDetails[0]}
+          {eventDetails.dow}
         </Typography>
         <Typography variant="h5" component="div">
-          {eventDetails[4]}
+          {eventDetails.description}
         </Typography>
         <Typography sx={{ mb: 1.5 }} color="text.secondary">
-            {eventDetails[2] + ' - ' + eventDetails[3]}
+            {eventDetails.start + ' - ' + eventDetails.end}
         </Typography>
         <Typography variant="body2">
-            {eventDetails[5]}
+            {eventDetails.notes}
         </Typography>
       </CardContent>
     </Card>

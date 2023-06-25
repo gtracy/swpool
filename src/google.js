@@ -1,23 +1,21 @@
 import axios from 'axios';
 
-const GOOGLE_SHEET_ID = '1OY9MmoBY2r3wU2kk9puaqSXMQIQd-xZVANloT0bVd3U';
 const GOOGLE_API_KEY = 'AIzaSyBEFZ6b-WI6QqRxgYGVDDs7snPDkg9Ud6c';
-const GOOGLE_SHEET_RANGLE = 'June10-July2!A12:F16';
 
-export const getSheetData = async () => {
+export const getSheetData = async (google_sheet_id,google_sheet_range) => {
   try {
     const response = await axios.get(
       'https://sheets.googleapis.com/v4/spreadsheets/'
-      +GOOGLE_SHEET_ID
+      +google_sheet_id
       +'/values/'
-      +GOOGLE_SHEET_RANGLE
+      +google_sheet_range
       +'?key='
       +GOOGLE_API_KEY
     );
     const data = response.data;
-    console.log(data.values);
-    return(data.values);
+    return(data);
   } catch (error) {
     console.error('Error fetching sheet data:', error);
+    return([]);
   }
 };
