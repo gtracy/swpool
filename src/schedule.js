@@ -4,7 +4,15 @@ import moment from 'moment';
 
 const GOOGLE_SHEET_ID = '1OY9MmoBY2r3wU2kk9puaqSXMQIQd-xZVANloT0bVd3U';
 const GOOGLE_SHEET_RANGE = [
-    'June10-July2!A2:F100'
+    'June10-July2!A2:F100',
+    'July3-July3',
+    'July4-July4',
+    'July5-July7',
+    'July8-July22',
+    'July23-July25',
+    'July26-July29',
+    'July30-August30',
+    'August31-August31'
   ];
   
 class Schedule {
@@ -43,7 +51,7 @@ class Schedule {
           
             // Calculate the difference in days using Moment.js duration
             const duration = moment.duration(end.diff(start));
-            const diffInDays = duration.asDays();
+            const diffInDays = duration.asDays()+1;
           
             return Math.round(diffInDays);
         }
