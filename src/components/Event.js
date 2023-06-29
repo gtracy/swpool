@@ -9,6 +9,12 @@ import CardIcon from './CardIcon';
 import { schedule } from '../schedule';
 
 const useStyles = makeStyles({
+  announce: {
+    border: '0.5px solid #d80032'
+  },
+  family: {
+    border: '1px solid #a9bcd0',
+  },
   open: {
     border: '1px solid #679436',
   },

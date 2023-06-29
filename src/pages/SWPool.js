@@ -95,7 +95,7 @@ export default function SWPool() {
                 <LinearProgress className={classes.containerDetails}/>
             ) : (
                 <Box sx={{ flexGrow: 1, maxHeight:'92vh',overflowY: 'auto', paddingTop: '100px' }}>
-                        <Announcement/>
+                        {/* <Announcement/> */}
                         <Programming activeDate={activeDate} />
                 </Box>
             )}

@@ -5,6 +5,7 @@ import SmsFailed from '@mui/icons-material/SmsFailed';
 import SchoolIcon from '@mui/icons-material/School';
 import SportsGymnasticsIcon from '@mui/icons-material/SportsGymnastics';
 import Diversity1Icon from '@mui/icons-material/Diversity1';
+import FamilyRestroomIcon from '@mui/icons-material/FamilyRestroom';
 
 export default function CardIcon({type}) {
 
@@ -24,6 +25,9 @@ export default function CardIcon({type}) {
             break;
         case 'ballet':
             IconComponent = Diversity1Icon;
+            break;
+        case 'family':
+            IconComponent = FamilyRestroomIcon;
             break;
     }
 
