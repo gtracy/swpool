@@ -1,5 +1,4 @@
 import PoolIcon from '@mui/icons-material/Pool';
-import GroupsIcon from '@mui/icons-material/Groups';
 import CropFreeIcon from '@mui/icons-material/CropFree';
 import SmsFailed from '@mui/icons-material/SmsFailed';
 import SchoolIcon from '@mui/icons-material/School';
@@ -29,6 +28,7 @@ export default function CardIcon({type}) {
         case 'family':
             IconComponent = FamilyRestroomIcon;
             break;
+        default:
     }
 
     return(

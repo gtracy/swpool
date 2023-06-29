@@ -38,29 +38,29 @@ export default function SWPool() {
     const today = moment().format('YYYY-MM-DD');
 
     const [activeDate, setActiveDate] = useState(today);
-    const [events,setEvents] = useState([]);
     const [loading,setLoading] = useState(true);
     const [dateLabel,setDateLabel] = useState(moment().format('dddd').toLocaleLowerCase())
 
     useEffect( () => {
-        setLoading(true);
-        console.log('active: '+moment(activeDate).format('YYYY-MM-DD'));
+        if( loading === true ) {
+            console.log('active: '+moment(activeDate).format('YYYY-MM-DD'));
 
-        setDateLabel(moment(activeDate).format('dddd').toLocaleLowerCase());
-        gaEvents.eventOccurred('load sheet');
+            setDateLabel(moment(activeDate).format('dddd').toLocaleLowerCase());
+            gaEvents.eventOccurred('load sheet');
 
-        schedule.loadSchedule()
-          .then(result => {
-            setEvents(result);
-          })
-          .catch(error => {
-            console.error("error loading arrival data");
-            console.dir(error);
-            gaEvents.eventOccurred('sheet load failed');
-          })
-          .finally(() => {
-            setLoading(false);
-          });
+            schedule.loadSchedule()
+            .then(result => {
+                // no-op
+            })
+            .catch(error => {
+                console.error("error loading arrival data");
+                console.dir(error);
+                gaEvents.eventOccurred('sheet load failed');
+            })
+            .finally(() => {
+                setLoading(false);
+            });
+        }
     },[activeDate])
 
     function datePicked(newDate) {
