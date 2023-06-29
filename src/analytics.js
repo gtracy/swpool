@@ -1,6 +1,6 @@
 import ReactGA from 'react-ga4';
 
-const DEV_SWITCH = true;
+const DEV_SWITCH = false;
 ReactGA.initialize('G-ETL4FMMKE5');
 
 const buttonClick = (action) => {
