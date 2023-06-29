@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import dayjs from 'dayjs';
+import moment from 'moment';
 
 import { useState } from 'react';
 
@@ -18,7 +19,6 @@ import Programming from '../components/Programming';
 import Announcement from '../components/Announcement';
 
 import { gaEvents } from '../analytics';
-import { getSheetData } from '../google';
 import { schedule } from '../schedule';
 
 const theme = createTheme({
@@ -35,19 +35,23 @@ const useStyles = makeStyles({
 
 export default function SWPool() {
     const classes = useStyles();
+    const today = moment().format('YYYY-MM-DD');
 
-    const [activeDate, setActiveDate] = useState('2023-06-25');
+    const [activeDate, setActiveDate] = useState(today);
     const [events,setEvents] = useState([]);
     const [loading,setLoading] = useState(true);
+    const [dateLabel,setDateLabel] = useState(moment().format('dddd').toLocaleLowerCase())
 
     useEffect( () => {
         setLoading(true);
+        console.log('active: '+moment(activeDate).format('YYYY-MM-DD'));
+
+        setDateLabel(moment(activeDate).format('dddd').toLocaleLowerCase());
         gaEvents.eventOccurred('load sheet');
 
         schedule.loadSchedule()
           .then(result => {
             setEvents(result);
-            console.log('Events loaded! ' + result.length);
           })
           .catch(error => {
             console.error("error loading arrival data");
@@ -59,6 +63,11 @@ export default function SWPool() {
           });
     },[activeDate])
 
+    function datePicked(newDate) {
+        setActiveDate(dayjs(newDate).format('YYYY-MM-DD'));
+        setDateLabel(dayjs(newDate).format('dddd').toLocaleLowerCase());
+    }
+
     return(
         <ThemeProvider theme={theme}>
 
@@ -66,21 +75,28 @@ export default function SWPool() {
 
             <AppBar 
                 position="fixed"
-                elevation={0}
+                elevation={2}
             >
-                <Toolbar sx={{ padding:0, margin:0,justifyContent: 'space-between' }}>
-                <LocalizationProvider dateAdapter={AdapterDayjs}>
-                    <MobileDatePicker defaultValue={dayjs(activeDate)}/>
-                </LocalizationProvider>
+                <Toolbar sx={{ backgroundColor: 'white', padding:2, margin:0, justifyContent: 'space-between' }}>
+                    <LocalizationProvider dateAdapter={AdapterDayjs}>
+                        <MobileDatePicker
+                            label={dateLabel}
+                            defaultValue={dayjs(activeDate)} 
+                            onChange={datePicked} 
+                            closeOnSelect={true}
+                            minDate={dayjs("2023-06-10")}
+                            maxDate={dayjs("2023-08-31")}
+                        />
+                    </LocalizationProvider>
                 </Toolbar>
             </AppBar>
 
             {loading ? (
                 <LinearProgress className={classes.containerDetails}/>
             ) : (
-                <Box sx={{ flexGrow: 1, maxHeight:'92vh',overflowY: 'auto', paddingTop: '70px' }}>
-                    <Announcement/>
-                    <Programming activeDate={activeDate} />
+                <Box sx={{ flexGrow: 1, maxHeight:'92vh',overflowY: 'auto', paddingTop: '100px' }}>
+                        <Announcement/>
+                        <Programming activeDate={activeDate} />
                 </Box>
             )}
 
@@ -90,7 +106,7 @@ export default function SWPool() {
                     sx={{ padding:0, paddingLeft:1, margin:0,justifyContent: 'space-between' }}
                 >
                     <Typography variant="subtitle2">
-                     <a href="mailto:feedback@swpool.org?subject=MadTransit feedback">feedback</a> <span>&#x1F64F;</span>
+                      <a href="mailto:feedback@swpool.org?subject=MadTransit feedback">feedback</a> <span>&#x1F64F;</span>
                     </Typography>
 
                     <InstallPWA/>
