@@ -9,7 +9,7 @@ export default function Programming({activeDate}) {
     const day = schedule.fetchDay(activeDate);
     return(<div>
         {day.events.map( (e,index) => (
-            <Event key={schedule.buildKey(e)} eventDetails={e} />
+            <Event key={schedule.buildKey(e)} eventDetails={e} activeDate={activeDate} />
         ))}
     </div>)
 

@@ -3,10 +3,9 @@ import { makeStyles } from '@mui/styles';
 
 import moment from 'moment';
 
-import { Card, CardContent, Collapse, Typography } from '@mui/material';
+import { Card, CardContent, Typography } from '@mui/material';
 import CardIcon from './CardIcon';
 
-import { schedule } from '../schedule';
 
 const useStyles = makeStyles({
   announce: {
@@ -41,16 +40,18 @@ const useStyles = makeStyles({
   }
 });
 
-export default function Event({eventDetails}) {
+export default function Event({eventDetails, activeDate}) {
   const classes = useStyles();
-  console.log(eventDetails.type);
   const className = classes[eventDetails.type];
 
   // determine if this event is already behind us today
+  // const currentTime = moment();
+  // const time = moment(eventDetails.end, 'hh:mm A');
+  // const old = time.isBefore(currentTime);
   const currentTime = moment();
-  const time = moment(eventDetails.end, 'hh:mm A');
-  const old = time.isBefore(currentTime);
-
+  const eventDateTime = moment(`${activeDate} ${eventDetails.end}`, 'YYYY-MM-DD hh:mm A');
+  const old = eventDateTime.isBefore(currentTime);
+  
   return(<div>
     {old 
       ?
