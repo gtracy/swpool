@@ -106,7 +106,7 @@ export default function SWPool() {
                     sx={{ padding:0, paddingLeft:1, margin:0,justifyContent: 'space-between' }}
                 >
                     <Typography variant="subtitle2">
-                      <a href="mailto:feedback@swpool.org?subject=MadTransit feedback">feedback</a> <span>&#x1F64F;</span>
+                      <a href="mailto:feedback@swpool.org?subject=SWPool feedback">feedback</a> <span>&#x1F64F;</span>
                     </Typography>
 
                     <InstallPWA/>
