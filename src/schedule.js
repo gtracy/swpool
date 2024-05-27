@@ -2,17 +2,16 @@ import { getSheetData } from './google';
 import { gaEvents } from './analytics';
 import moment from 'moment';
 
-const GOOGLE_SHEET_ID = '1OY9MmoBY2r3wU2kk9puaqSXMQIQd-xZVANloT0bVd3U';
+const GOOGLE_SHEET_ID = '1VKPyuyE_apUjKQGpnMAQRb-nwvlIB54FCw3aQYopCoA';
 const GOOGLE_SHEET_RANGE = [
-    'June10-July2!A2:F100',
-    'July3-July3',
-    'July4-July4',
-    'July5-July7',
-    'July8-July22',
-    'July23-July25',
-    'July26-July29',
-    'July30-August30',
-    'August31-August31'
+    'May25-June2!A2:F100',
+    'June3-June5',
+    'June6-June30',
+    'July1-July5',
+    'July6-July26',
+    'July27-August6',
+    'August7-September1',
+    'September2-September2'
   ];
   
 class Schedule {

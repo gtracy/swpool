@@ -84,8 +84,8 @@ export default function SWPool() {
                             defaultValue={dayjs(activeDate)} 
                             onChange={datePicked} 
                             closeOnSelect={true}
-                            minDate={dayjs("2023-06-10")}
-                            maxDate={dayjs("2023-08-31")}
+                            minDate={dayjs("2024-05-25")}
+                            maxDate={dayjs("2024-09-02")}
                         />
                     </LocalizationProvider>
                 </Toolbar>
