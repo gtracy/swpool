@@ -5,8 +5,8 @@ import moment from 'moment';
 const GOOGLE_SHEET_ID = '1VKPyuyE_apUjKQGpnMAQRb-nwvlIB54FCw3aQYopCoA';
 const GOOGLE_SHEET_RANGE = [
     'May25-June2!A2:F100',
-    'June3-June5',
-    'June6-June30',
+    'June3-June7',
+    'June8-June30',
     'July1-July5',
     'July6-July26',
     'July27-August6',
