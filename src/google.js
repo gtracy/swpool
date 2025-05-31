@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const GOOGLE_API_KEY = 'AIzaSyBEFZ6b-WI6QqRxgYGVDDs7snPDkg9Ud6c';
+const GOOGLE_API_KEY = process.env.REACT_APP_GOOGLE_API_KEY;
 
 export const getSheetData = async (google_sheet_id,google_sheet_range) => {
   try {

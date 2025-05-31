@@ -81,9 +81,9 @@ class Schedule {
             }
         }
 
-        console.log(rawData.range);
+        //console.log(rawData.range);
         const {startDate,endDate,days} = extractDatesFromString(rawData.range);
-        console.log(startDate,endDate,days);
+        //console.log(startDate,endDate,days);
         for( let i=0; i < days; i++ ) {
             const currentDate = moment(startDate).add(i, 'days');
             const formattedDate = currentDate.format('YYYY-MM-DD');
