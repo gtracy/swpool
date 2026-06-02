@@ -308,4 +308,13 @@ function compile() {
   console.log(`Successfully compiled schedule to ${OUTPUT_PATH}. Total days: ${Object.keys(schedule).length}`);
 }
 
-compile();
+if (require.main === module) {
+  compile();
+}
+
+module.exports = {
+  parseCSVLine,
+  parsePeriod,
+  getDaysOfWeekList,
+  compile
+};
