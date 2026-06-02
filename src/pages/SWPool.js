@@ -35,11 +35,13 @@ const useStyles = makeStyles({
 
 export default function SWPool() {
     const classes = useStyles();
-    const today = moment().format('YYYY-MM-DD');
+    const today = moment().isBetween('2026-05-30', '2026-09-01', undefined, '[]')
+        ? moment().format('YYYY-MM-DD')
+        : '2026-05-30';
 
     const [activeDate, setActiveDate] = useState(today);
     const [loading,setLoading] = useState(true);
-    const [dateLabel,setDateLabel] = useState(moment().format('dddd').toLocaleLowerCase())
+    const [dateLabel,setDateLabel] = useState(moment(today).format('dddd').toLocaleLowerCase())
 
     useEffect( () => {
         if( loading === true ) {
@@ -84,8 +86,8 @@ export default function SWPool() {
                             defaultValue={dayjs(activeDate)} 
                             onChange={datePicked} 
                             closeOnSelect={true}
-                            minDate={dayjs("2024-05-25")}
-                            maxDate={dayjs("2025-09-02")}
+                            minDate={dayjs("2026-05-30")}
+                            maxDate={dayjs("2026-09-01")}
                         />
                     </LocalizationProvider>
                 </Toolbar>
