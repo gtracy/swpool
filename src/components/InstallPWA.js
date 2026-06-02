@@ -49,8 +49,8 @@ const InstallPWA = () => {
   }
 
   return (
-    <IconButton color="secondary" onClick={onClick}>
-        <Typography variant="caption">install app</Typography>
+    <IconButton sx={{ color: 'white' }} onClick={onClick}>
+        <Typography variant="caption" sx={{ color: 'white', marginRight: '4px' }}>install app</Typography>
         <InstallMobileIcon/>
     </IconButton>
   );
