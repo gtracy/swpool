@@ -1,13 +1,17 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
+import { vi } from 'vitest';
 import Event from './Event';
 
 // Mock CardIcon to isolate Event rendering
-jest.mock('./CardIcon', () => () => <div data-testid="card-icon" />);
+vi.mock('./CardIcon', () => ({
+  default: () => <div data-testid="card-icon" />
+}));
 
 // Mock moment to freeze "current time" to 2026-06-01 12:00 PM
-jest.mock('moment', () => {
-  const mockActualMoment = jest.requireActual('moment');
+vi.mock('moment', async (importOriginal) => {
+  const actual = await importOriginal();
+  const mockActualMoment = actual.default || actual;
   const mockMoment = (val, format) => {
     if (val === undefined) {
       return mockActualMoment('2026-06-01T12:00:00');
@@ -15,7 +19,7 @@ jest.mock('moment', () => {
     return mockActualMoment(val, format);
   };
   Object.assign(mockMoment, mockActualMoment);
-  return mockMoment;
+  return { default: mockMoment };
 });
 
 describe('Event Component', () => {

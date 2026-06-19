@@ -1,14 +1,15 @@
 import React from 'react';
+import { vi } from 'vitest';
 
 // Mock window.matchMedia before imports
 window.matchMedia = window.matchMedia || function() {
   return {
     matches: false,
-    addListener: jest.fn(),
-    removeListener: jest.fn(),
-    addEventListener: jest.fn(),
-    removeEventListener: jest.fn(),
-    dispatchEvent: jest.fn(),
+    addListener: vi.fn(),
+    removeListener: vi.fn(),
+    addEventListener: vi.fn(),
+    removeEventListener: vi.fn(),
+    dispatchEvent: vi.fn(),
   };
 };
 
@@ -18,7 +19,7 @@ import { schedule } from '../schedule';
 import { gaEvents } from '../analytics';
 
 // Mock MUI DatePicker to easily trigger onChange in test environment
-jest.mock('@mui/x-date-pickers', () => ({
+vi.mock('@mui/x-date-pickers', () => ({
   MobileDatePicker: ({ label, onChange, defaultValue }) => (
     <input
       data-testid="mock-date-picker"
@@ -31,8 +32,9 @@ jest.mock('@mui/x-date-pickers', () => ({
 
 
 // Mock moment to freeze current date to June 1st, 2026 (a valid date within our range)
-jest.mock('moment', () => {
-  const mockActualMoment = jest.requireActual('moment');
+vi.mock('moment', async (importOriginal) => {
+  const actual = await importOriginal();
+  const mockActualMoment = actual.default || actual;
   const mockMoment = (val, format) => {
     if (val === undefined) {
       return mockActualMoment('2026-06-01T12:00:00');
@@ -40,13 +42,13 @@ jest.mock('moment', () => {
     return mockActualMoment(val, format);
   };
   Object.assign(mockMoment, mockActualMoment);
-  return mockMoment;
+  return { default: mockMoment };
 });
 
 // Mock analytics
-jest.mock('../analytics', () => ({
+vi.mock('../analytics', () => ({
   gaEvents: {
-    eventOccurred: jest.fn(),
+    eventOccurred: vi.fn(),
   },
 }));
 
@@ -55,7 +57,7 @@ jest.mock('../analytics', () => ({
 
 describe('SWPool Page Integration Tests', () => {
   afterEach(() => {
-    jest.restoreAllMocks();
+    vi.restoreAllMocks();
   });
 
   test('renders SWPool page, shows loader, and loads initial schedule', async () => {
@@ -80,11 +82,11 @@ describe('SWPool Page Integration Tests', () => {
   });
 
   test('handles schedule loading failure gracefully', async () => {
-    const consoleErrorSpy = jest.spyOn(console, 'error').mockImplementation(() => {});
-    const consoleDirSpy = jest.spyOn(console, 'dir').mockImplementation(() => {});
+    const consoleErrorSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
+    const consoleDirSpy = vi.spyOn(console, 'dir').mockImplementation(() => {});
     
     // Mock loadSchedule to fail for a single call
-    jest.spyOn(schedule, 'loadSchedule').mockRejectedValueOnce(new Error('Mock network failure'));
+    vi.spyOn(schedule, 'loadSchedule').mockRejectedValueOnce(new Error('Mock network failure'));
 
     render(<SWPool />);
 

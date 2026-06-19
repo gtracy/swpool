@@ -1,34 +1,37 @@
 import React from 'react';
 import { render, screen, fireEvent, act } from '@testing-library/react';
+import { vi } from 'vitest';
 import InstallPWA from './InstallPWA';
 import { gaEvents } from '../analytics';
 
 // Mock analytics
-jest.mock('../analytics', () => ({
+vi.mock('../analytics', () => ({
   gaEvents: {
-    buttonClick: jest.fn(),
+    buttonClick: vi.fn(),
   },
 }));
 
 // Mock Material UI icons
-jest.mock('@mui/icons-material/InstallMobile', () => () => <div data-testid="install-icon" />);
+vi.mock('@mui/icons-material/InstallMobile', () => ({
+  default: () => <div data-testid="install-icon" />
+}));
 
 describe('InstallPWA Component', () => {
   let matchMediaMock;
 
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
     
     // Default mock for matchMedia (not standalone mode)
-    matchMediaMock = jest.fn().mockImplementation(query => ({
+    matchMediaMock = vi.fn().mockImplementation(query => ({
       matches: false,
       media: query,
       onchange: null,
-      addListener: jest.fn(),
-      removeListener: jest.fn(),
-      addEventListener: jest.fn(),
-      removeEventListener: jest.fn(),
-      dispatchEvent: jest.fn(),
+      addListener: vi.fn(),
+      removeListener: vi.fn(),
+      addEventListener: vi.fn(),
+      removeEventListener: vi.fn(),
+      dispatchEvent: vi.fn(),
     }));
     window.matchMedia = matchMediaMock;
   });
@@ -42,7 +45,7 @@ describe('InstallPWA Component', () => {
     render(<InstallPWA />);
 
     const beforeInstallPromptEvent = new Event('beforeinstallprompt');
-    beforeInstallPromptEvent.preventDefault = jest.fn();
+    beforeInstallPromptEvent.preventDefault = vi.fn();
 
     act(() => {
       window.dispatchEvent(beforeInstallPromptEvent);
@@ -58,8 +61,8 @@ describe('InstallPWA Component', () => {
     render(<InstallPWA />);
 
     const beforeInstallPromptEvent = new Event('beforeinstallprompt');
-    beforeInstallPromptEvent.preventDefault = jest.fn();
-    beforeInstallPromptEvent.prompt = jest.fn();
+    beforeInstallPromptEvent.preventDefault = vi.fn();
+    beforeInstallPromptEvent.prompt = vi.fn();
 
     act(() => {
       window.dispatchEvent(beforeInstallPromptEvent);

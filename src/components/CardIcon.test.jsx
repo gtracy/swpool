@@ -1,15 +1,16 @@
 import React from 'react';
 import { render } from '@testing-library/react';
+import { vi } from 'vitest';
 import CardIcon from './CardIcon';
 
 // Mock MUI icons to avoid rendering large SVGs and easily assert on them
-jest.mock('@mui/icons-material/Pool', () => () => <div data-testid="pool-icon" />);
-jest.mock('@mui/icons-material/CropFree', () => () => <div data-testid="crop-free-icon" />);
-jest.mock('@mui/icons-material/SmsFailed', () => () => <div data-testid="sms-failed-icon" />);
-jest.mock('@mui/icons-material/School', () => () => <div data-testid="school-icon" />);
-jest.mock('@mui/icons-material/SportsGymnastics', () => () => <div data-testid="sports-gymnastics-icon" />);
-jest.mock('@mui/icons-material/Diversity1', () => () => <div data-testid="diversity-icon" />);
-jest.mock('@mui/icons-material/FamilyRestroom', () => () => <div data-testid="family-restroom-icon" />);
+vi.mock('@mui/icons-material/Pool', () => ({ default: () => <div data-testid="pool-icon" /> }));
+vi.mock('@mui/icons-material/CropFree', () => ({ default: () => <div data-testid="crop-free-icon" /> }));
+vi.mock('@mui/icons-material/SmsFailed', () => ({ default: () => <div data-testid="sms-failed-icon" /> }));
+vi.mock('@mui/icons-material/School', () => ({ default: () => <div data-testid="school-icon" /> }));
+vi.mock('@mui/icons-material/SportsGymnastics', () => ({ default: () => <div data-testid="sports-gymnastics-icon" /> }));
+vi.mock('@mui/icons-material/Diversity1', () => ({ default: () => <div data-testid="diversity-icon" /> }));
+vi.mock('@mui/icons-material/FamilyRestroom', () => ({ default: () => <div data-testid="family-restroom-icon" /> }));
 
 describe('CardIcon Component', () => {
   test('renders CropFreeIcon for open type', () => {
