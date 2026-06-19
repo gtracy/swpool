@@ -16,7 +16,6 @@ import InstallPWA from '../components/InstallPWA';
 import { MobileDatePicker } from '@mui/x-date-pickers';
 
 import Programming from '../components/Programming';
-import Announcement from '../components/Announcement';
 
 import { gaEvents } from '../analytics';
 import { schedule } from '../schedule';
@@ -63,7 +62,7 @@ export default function SWPool() {
                 setLoading(false);
             });
         }
-    },[activeDate])
+    },[activeDate, loading])
 
     function datePicked(newDate) {
         setActiveDate(dayjs(newDate).format('YYYY-MM-DD'));
