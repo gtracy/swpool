@@ -1,19 +1,21 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
+import { vi } from 'vitest';
 import Programming from './components/Programming';
 
 // Mock gaEvents to avoid tracking during tests
-jest.mock('./analytics', () => ({
+vi.mock('./analytics', () => ({
   gaEvents: {
-    eventOccurred: jest.fn(),
+    eventOccurred: vi.fn(),
   },
 }));
 
 // Mock moment to freeze "current time" to May 20, 2026,
 // so that all schedule events (May 30 - Sep 1) are always in the "future"
 // and render as active cards with notes.
-jest.mock('moment', () => {
-  const mockActualMoment = jest.requireActual('moment');
+vi.mock('moment', async (importOriginal) => {
+  const actual = await importOriginal();
+  const mockActualMoment = actual.default || actual;
   const mockMoment = (val, format) => {
     if (val === undefined) {
       return mockActualMoment('2026-05-20T12:00:00Z');
@@ -21,22 +23,22 @@ jest.mock('moment', () => {
     return mockActualMoment(val, format);
   };
   Object.assign(mockMoment, mockActualMoment);
-  return mockMoment;
+  return { default: mockMoment };
 });
 
 // Mock window.matchMedia to prevent MUI errors during rendering
 beforeAll(() => {
   Object.defineProperty(window, 'matchMedia', {
     writable: true,
-    value: jest.fn().mockImplementation(query => ({
+    value: vi.fn().mockImplementation(query => ({
       matches: false,
       media: query,
       onchange: null,
-      addListener: jest.fn(),
-      removeListener: jest.fn(),
-      addEventListener: jest.fn(),
-      removeEventListener: jest.fn(),
-      dispatchEvent: jest.fn(),
+      addListener: vi.fn(),
+      removeListener: vi.fn(),
+      addEventListener: vi.fn(),
+      removeEventListener: vi.fn(),
+      dispatchEvent: vi.fn(),
     })),
   });
 });
