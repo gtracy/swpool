@@ -48,9 +48,10 @@ describe('Event Component', () => {
 
     render(<Event eventDetails={eventDetails} activeDate="2026-06-01" />);
 
-    // Past event renders "description was start-end" in a simple card format
-    expect(screen.getByText('Morning Swim was 9:00 AM-11:00 AM')).toBeInTheDocument();
+    // Past event renders with muted styling: icon, strikethrough time, and description
+    expect(screen.getByText('Morning Swim')).toBeInTheDocument();
+    expect(screen.getByTestId('card-icon')).toBeInTheDocument();
+    // Notes are hidden on past events
     expect(screen.queryByText('Wading pool open')).not.toBeInTheDocument();
-    expect(screen.queryByTestId('card-icon')).not.toBeInTheDocument();
   });
 });
