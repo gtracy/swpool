@@ -6,7 +6,7 @@ import SportsGymnasticsIcon from '@mui/icons-material/SportsGymnastics';
 import Diversity1Icon from '@mui/icons-material/Diversity1';
 import FamilyRestroomIcon from '@mui/icons-material/FamilyRestroom';
 
-export default function CardIcon({type}) {
+export default function CardIcon({type, color}) {
 
     let IconComponent = SmsFailed;
     switch( type) {
@@ -32,6 +32,6 @@ export default function CardIcon({type}) {
     }
 
     return(
-        <IconComponent />
+        <IconComponent sx={{ color: color || 'inherit', fontSize: 28, opacity: 0.85 }} />
     )
 }
